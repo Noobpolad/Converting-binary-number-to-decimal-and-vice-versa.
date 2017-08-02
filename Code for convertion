@@ -1,0 +1,142 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void convertingBinaryToDecimal();
+void convertingDecimalToBinary();
+
+int main()
+{
+    int operation;
+    cout << "Choose the option:" <<endl;
+    cout << "1)For converting binary number to decimal press 1." << endl;
+    cout << "2)For converting decimal number to binary press 2." << endl;
+    cin >> operation;
+
+
+    if(operation == 1){
+        convertingBinaryToDecimal();
+    }
+
+    else if(operation == 2){
+        convertingDecimalToBinary();
+    }
+
+    return 0;
+}
+
+void convertingBinaryToDecimal(){
+
+   int binaryNumberOrig;
+   int binaryNumberCopy;
+   int noOfDigits = 0;
+
+   cout << endl << "Put the binary number." ;
+   cin >> binaryNumberOrig;
+   cout << endl;
+
+   binaryNumberCopy = binaryNumberOrig;
+
+   do{
+
+        binaryNumberOrig = binaryNumberOrig / 10;
+        noOfDigits++;
+
+   }while(binaryNumberOrig >= 1);
+
+    int sum = 0;
+    int number;
+
+    for(int a = 0;a < noOfDigits;a++){
+
+        if(binaryNumberCopy % 10 == 1 && a < noOfDigits-1){
+
+            number = pow(2,a);
+
+            cout << 2 << "^" << a << " + ";
+
+            sum += number;
+            binaryNumberCopy /= 10;
+
+        }
+
+        else if(binaryNumberCopy % 10 == 1 && a == noOfDigits-1){
+
+            number = pow(2,a);
+
+            cout << 2 << "^" << a << " = ";
+
+            sum += number;
+            binaryNumberCopy /= 10;
+
+        }
+
+        else if(binaryNumberCopy % 10 == 0){
+
+             binaryNumberCopy /= 10;
+
+        }
+
+        else{
+
+            cout << "You have wrong number at position:" << a+1 << " try again.";
+            break;
+
+        }
+
+    }
+
+    cout << sum << endl;
+
+}
+
+void convertingDecimalToBinary(){
+
+   int decimalOrig;
+   int decimalCopy;
+   int numberOfOperations = 0;
+
+   cout << "Put the number:";
+   cin >> decimalOrig;
+
+   decimalCopy = decimalOrig;
+
+    do{
+
+        decimalOrig /= 2;
+        numberOfOperations++;
+
+   }while(decimalOrig >= 1);
+
+   int binaryNumber[numberOfOperations];
+   int x = numberOfOperations;
+
+   while(decimalCopy >= 1){
+
+       if(decimalCopy % 2 == 0){
+
+        binaryNumber[x-1]=0;
+
+       }
+
+       else{
+
+        binaryNumber[x-1]=1;
+
+       }
+
+       x--;
+       decimalCopy /= 2;
+
+   }
+
+    cout << endl;
+
+    for(int a = 0; a <= numberOfOperations-1;a++){
+
+        cout << binaryNumber[a] << " ";
+
+    }
+
+}
